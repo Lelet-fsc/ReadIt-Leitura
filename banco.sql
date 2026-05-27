@@ -1,0 +1,30 @@
+CREATE DATABASE IF NOT EXISTS loja CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE loja;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(120) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NULL,
+    nome VARCHAR(120) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    telefone VARCHAR(30) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    numero VARCHAR(20) NOT NULL,
+    complemento VARCHAR(120),
+    cep VARCHAR(20) NOT NULL,
+    bairro VARCHAR(120) NOT NULL,
+    cidade VARCHAR(120) NOT NULL,
+    uf CHAR(2) NOT NULL,
+    metodo_pagamento VARCHAR(20) NOT NULL,
+    itens TEXT NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
+);
